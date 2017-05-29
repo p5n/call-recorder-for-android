@@ -34,6 +34,11 @@ public class MyPhoneReceiver extends BroadcastReceiver {
 		phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
 		String extraState = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 		Log.d(Constants.TAG, "MyPhoneReciever phoneNumber "+phoneNumber);
+		if(phoneNumber != null &&
+		   phoneNumber.startsWith("*")) {
+			Log.d(Constants.TAG, "MyPhoneReciever ignore phoneNumber "+phoneNumber);
+			return;
+		}
 
 		if (MainActivity.updateExternalStorageState() == Constants.MEDIA_MOUNTED) {
 			try {
